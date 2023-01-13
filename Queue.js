@@ -1,4 +1,4 @@
-// LIFO - last in, first out is the concept of a Stack
+// FIFO = first in, first out concept is a Queue
 // Insertion = O(1)
 // Removal = O(1)
 // Searching = O(N)
@@ -11,33 +11,31 @@ class Node {
   }
 }
 
-class Stack {
+class Queue {
   constructor() {
     this.first = null;
     this.last = null;
     this.size = 0;
   }
 
-  // add to top of stack
-  push(value) {
+  // add to queue
+  enqueue(value) {
     let node = new Node(value);
     if (this.size === 0) {
       this.first = node;
       this.last = node;
     } else {
-      let current = this.first;
-      this.first = node;
-      this.first.next = current;
+      this.last.next = node;
+      this.last = node;
     }
     return ++this.size;
   }
 
-  // removes from top of stack
-  pop() {
+  // remove from queue
+  dequeue() {
     if (this.size === 0) return null;
     let temp = this.first;
     if (this.size === 1) {
-      this.first = null;
       this.last = null;
     } else {
       this.first = temp.next;
