@@ -1,45 +1,75 @@
+// moves the largest values into their correct position as it goes
 const bubbleSort = (arr) => {
+  // create a stopping variable in case given arr is almost already sorted
   let noSwaps
-  for(let i = arr.length; i > 0; i --){
+  // iterate over the array starting at the end moving to the beginning
+  for(let i = arr.length; i > 0; i--){
+    // every pass through the array, assume there were no swaps
     noSwaps = true
-    for (let j = 0; j < i -1; j++){
+    // create a second marker to compare the number just before i
+    for (let j = 0; j < i - 1; j++){
+      // if the number just before i is greater than i
       if (arr[j] > arr[j + 1]){
+        // swap those two numbers
         let temp = arr[j]
         arr[j] = arr[j + 1]
         arr[j + 1] = temp
+        // change no swaps so we know there was a swap to the iteration continues
         noSwaps = false
       }
     }
+    // if we didn't swap anything, break out of the iteration
     if (noSwaps) break
   }  
+  // return the sorted array
   return arr
 }
 
+// moves the smallest values into the correct order as it goes
 const selectionSort = (arr) => {
+  // iterate over the array
   for (let i = 0; i < arr.length; i++){
+    // create a marker pointing to our current lowest value (where we're starting)
     let min = i
+    // create a marker that goes through the array to compare to our first marker
     for (let j = i + 1; j < arr.length; j++){
+      // if the second marker's value is less than the first marker's value
+      // update the lowest value marker
       if (arr[j] < arr[min]) min = j
     }
+    // if our min was changed from the second iteration,
     if (i !== min){
+      // swap the two values
       let temp = arr[i]
       arr[i] = arr[min]
-      arr[min = temp]
+      arr[min] = temp
     }
   }
+  // return the sorted array
   return arr
 }
 
+// sorts the array as it iterates
+// good if data is sorted and you need to add new items as it comes in
 const insertionSort = (arr) => {
+  // iterate through the array starting at the second element
   for (let i = 1; i < arr.length; i++){
     let current = arr[i]
-    for (let j = i - 1; j > 0 && arr[j] > current; j--){
+    // on each pass, create marker for value just before current element
+    // and work backwards as long as the second marker value is greater
+    // than the current element
+    for (let j = i - 1; j >= 0 && arr[j] > current; j--){
+      // 
       arr[j + 1] = arr[j]
     }
-    arr[i + i] = current
+    // j will end one past where the value should go so update j + 1
+    // to insert value at correct position
+    arr[j + 1] = current
   }
+  // return sorted array
   return arr
 }
+
 
 const mergeSort = (arr) => {
   if (arr.length < 1) return arr
