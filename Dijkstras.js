@@ -58,11 +58,11 @@ class WeightedGraph {
       if(shortest === finish){
         // refer to previous object. As long as there is a value associated with the key,
         // which there will be until you get to the first node, see line 51
-        while(previous[smallest]) {
-          // add the smallest distance to the path
-          path.push(smallest)
-          // update the smallest to be the node the smallest was just looking at on line 61
-          smallest = previous[smallest]
+        while(previous[shortest]) {
+          // add the shortest distance to the path
+          path.push(shortest)
+          // update the shortest to be the node the shortest was just looking at on line 61
+          shortest = previous[shortest]
         }
         // call break to bust out of while loop set on 54, as priority queue keeps getting added to
         break
@@ -70,28 +70,28 @@ class WeightedGraph {
       // if the current vertex 
       if (shortest || distances[shortest] !== Infinity){
         // loop over al the neighbors of the current vertex
-        for(let neighbor in this.adjacencyList[smallest]){
+        for(let neighbor in this.adjacencyList[shortest]){
           // find neighboring node
-          let nextNode = this.adjacencyList[smallest][neighbor]
+          let nextNode = this.adjacencyList[shortest][neighbor]
           // calculate distance to neighboring node
-          let candidate = distances[smallest] + nextNode.weight
+          let candidate = distances[shortest] + nextNode.weight
           // check the distance between the possible shortest route and the stored distance from line 44
           // use the key of .node, look at how the edges are added in `addEdge`
           let nextNeighbor = nextNode.node
           // compare the distance to the current shortest distance to that node
           if (candidate < distances[nextNeighbor]) {
-            // update the new smallest distance to neightbor
+            // update the new shortest distance to neightbor
             distances[nextNeighbor] = candidate
             // update previous - how we got to neight
-            previous[nextNeighbor] = smallest
+            previous[nextNeighbor] = shortest
             // enqueue in priority queue with new priority
             nodes.enqueue(nextNeighbor, candidate)
           }
         }
       }
     }
-    // add the smallest to the path and reverse the order and return it all
-    return path.concat(smallest).reverse()
+    // add the shortest to the path and reverse the order and return it all
+    return path.concat(shortest).reverse()
   }
 }
 
