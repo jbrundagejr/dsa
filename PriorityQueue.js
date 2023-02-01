@@ -15,7 +15,7 @@ class PriorityQueue {
   }
 
   // adds node in correct position
-  insert(value, priority) {
+  enqueue(value, priority) {
     let node = new Node(value, priority);
     // add new value to end of list
     this.values.push(node);

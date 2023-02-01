@@ -4,7 +4,7 @@ class MaxBinaryHeap {
   }
 
   // adds node in correct position
-  insert(value) {
+  enqueue(value) {
     // add new value to end of list
     this.values.push(value);
     // bubble it to its correct position
@@ -35,7 +35,7 @@ class MaxBinaryHeap {
   }
 
   // pulls the largest node out and reorders the heap appropriately
-  extractMax() {
+  dequeue() {
     // largest value to be returned at the end
     const max = this.values[0];
     // remove the last element of the heap
